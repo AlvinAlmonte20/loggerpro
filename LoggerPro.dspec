@@ -1,0 +1,49 @@
+min dpm client version: 1.0
+
+metadata:
+  id: DanieleTeti.LoggerPro
+  version: 2.1.1
+  description: >
+    Professional, thread-safe and DLL-safe logging library for Delphi with a
+    fluent builder API and many appenders: file, JSONL, HTML, console, HTTP,
+    webhook, UDP Syslog, ElasticSearch, NSQ, e-mail, FireDAC DB, VCL controls,
+    OutputDebugString, Windows Event Log, memory and callback.
+  authors:
+    - Daniele Teti
+  projectUrl: https://github.com/danieleteti/loggerpro
+  repositoryUrl: https://github.com/danieleteti/loggerpro
+  repositoryType: git
+  license: Apache-2.0
+  copyright: Copyright (c) 2010-2026 Daniele Teti
+  readme: README.md
+  tags:
+    - logging
+    - logger
+    - log
+    - appender
+    - syslog
+    - elasticsearch
+  # No external DPM dependencies: VCL, FireDAC and Indy all ship with RAD
+  # Studio (Indy and FireDAC on every platform, Linux included). The VCL
+  # appenders are {$IF MSWINDOWS}-guarded and stay dormant on non-Windows
+  # targets, so the package is cross-platform.
+
+# LoggerPro is shipped as a source package: the consuming project compiles the
+# units directly, so no precompiled BPL is produced. Supported on every RAD
+# Studio release from 10.0 Seattle to 13 Florence. The cross-platform core and
+# the fluent builder work on Windows, Linux and macOS; the VCL/Windows-only
+# appenders activate on Windows targets only.
+targetPlatforms:
+  - compiler from: 10.0
+    compiler to: 13.0
+    platforms: [Win32, Win64, Linux64, OSX64, OSXARM64]
+
+templates:
+  - name: default
+    source:
+      - src: ./*.pas
+        dest: src
+      - src: ./*.inc
+        dest: src
+      - src: ./README.md
+        dest: .
